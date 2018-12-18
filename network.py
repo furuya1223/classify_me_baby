@@ -31,8 +31,8 @@ class Classifier(nn.Module):
         x = F.max_pool2d(x, 2, 2)  # 縦横ともに半分になる（64->32）
         x = F.relu(self.conv3_1(x))
         x = F.relu(self.conv3_2(x))
-        x = F.max_pool2d(x, 2, 2)  # 縦横ともに半分になる（32->16）
+        x = F.max_pool2d(self.drop1(x), 2, 2)  # 縦横ともに半分になる（32->16）
         x = x.view(-1, 16*16*128)
-        x = F.relu(self.fc1(x))
+        x = self.drop2(F.relu(self.fc1(x)))
         x = self.fc2(x)
         return F.softmax(x, dim=1)
