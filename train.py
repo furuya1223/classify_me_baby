@@ -26,9 +26,9 @@ labels = np.array(['agiri', 'botsu', 'others', 'sonya', 'yasuna', 'yasuna_sonya'
 label_indices = {label: index for index, label in enumerate(labels)}
 weight = torch.Tensor([1/9, 1/2, 1/13, 1/35, 1/68, 1/9])
 
-train_set = DatasetFromFolder(join('kill_me_baby_classification', 'train'), label_indices, 'train')
+train_set = DatasetFromFolder(join('dataset', 'train'), label_indices, 'train')
 train_data_loader = DataLoader(dataset=train_set, batch_size=option.batchSize, shuffle=True)
-test_set = DatasetFromFolder(join('kill_me_baby_classification', 'test'), label_indices, 'test')
+test_set = DatasetFromFolder(join('dataset', 'test'), label_indices, 'test')
 test_data_loader = DataLoader(dataset=test_set, batch_size=1)
 
 
