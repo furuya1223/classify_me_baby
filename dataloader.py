@@ -7,17 +7,23 @@ import numpy as np
 
 
 class DatasetFromFolder(data.Dataset):
-    def __init__(self, image_dir, label_indices):
+    def __init__(self, image_dir, label_indices, mode='train'):
         super(DatasetFromFolder, self).__init__()
         self.images = [(join(image_dir, label, filename), label)
                        for label in listdir(image_dir)
                        for filename in listdir(join(image_dir, label))]
         self.label_indices = label_indices
 
-        transform_list = [transforms.ToTensor(),
+        transform_train = [transforms.RandomResizedCrop(128),
+                           transforms.RandomHorizontalFlip(),
+                           transforms.ToTensor(),
+                           transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))]
+        transform_test = [transforms.ToTensor(),
                           transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))]
-
-        self.transform = transforms.Compose(transform_list)
+        if mode == 'train':
+            self.transform = transforms.Compose(transform_train)
+        else:
+            self.transform = transforms.Compose(transform_test)
 
     def __getitem__(self, index):
         # Load Image
