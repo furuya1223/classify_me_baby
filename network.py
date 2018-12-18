@@ -25,16 +25,13 @@ class Classifier(nn.Module):
 
     def forward(self, x):
         x = F.relu(self.conv1_1(x))
-        x = F.relu(self.conv1_2(x))
-        x = F.relu(self.bn1(self.conv1_3(x)))
+        x = F.relu(self.bn1(self.conv1_2(x)))
         x = F.max_pool2d(x, 2, 2)  # 縦横ともに半分になる（128->64）
         x = F.relu(self.conv2_1(x))
-        x = F.relu(self.conv2_2(x))
-        x = F.relu(self.bn2(self.conv2_3(x)))
+        x = F.relu(self.bn2(self.conv2_2(x)))
         x = F.max_pool2d(x, 2, 2)  # 縦横ともに半分になる（64->32）
         x = F.relu(self.conv3_1(x))
-        x = F.relu(self.conv3_2(x))
-        x = F.relu(self.bn3(self.conv3_3(x)))
+        x = F.relu(self.bn3(self.conv3_2(x)))
         x = F.max_pool2d(x, 2, 2)  # 縦横ともに半分になる（32->16）
         x = x.view(-1, 16*16*128)
         x = F.relu(self.fc1(x))
