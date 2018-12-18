@@ -15,7 +15,7 @@ class Classifier(nn.Module):
         self.conv1_2 = nn.Conv2d(32, 32, 3, stride=1, padding=1)   # 畳み込み層
         self.conv2_1 = nn.Conv2d(32, 64, 3, stride=1, padding=1)   # 畳み込み層
         self.conv2_2 = nn.Conv2d(64, 64, 3, stride=1, padding=1)   # 畳み込み層
-        self.conv3_1 = nn.Conv2d(32, 64, 3, stride=1, padding=1)   # 畳み込み層
+        self.conv3_1 = nn.Conv2d(64, 64, 3, stride=1, padding=1)   # 畳み込み層
         self.conv3_2 = nn.Conv2d(64, 64, 3, stride=1, padding=1)   # 畳み込み層
         self.fc1 = nn.Linear(16*16*64, 500)     # 全結合層
         self.fc2 = nn.Linear(500, 6)         # 全結合層
