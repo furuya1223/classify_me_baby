@@ -47,6 +47,7 @@ print(classifier)
 def train():
     for epoch in range(1, option.nEpochs + 1):
         print('Epoch: {}'.format(epoch))
+        classifier.train()
         for iteration, (image, label) in enumerate(train_data_loader, 1):
             if option.cuda:
                 image = Variable(image.cuda())
@@ -62,6 +63,7 @@ def train():
             print('Iteration: {}/{}, Loss: {:.04f}'.format(iteration, len(train_data_loader), loss.data))
 
         # test
+        classifier.eval()
         with torch.no_grad():
             all_correct_num = 0
             correct_num = [0] * 6
