@@ -15,9 +15,11 @@ class Classifier(nn.Module):
         self.conv1_2 = nn.Conv2d(32, 32, 3, stride=1, padding=1)   # 畳み込み層
         self.conv2_1 = nn.Conv2d(32, 64, 3, stride=1, padding=1)   # 畳み込み層
         self.conv2_2 = nn.Conv2d(64, 64, 3, stride=1, padding=1)   # 畳み込み層
-        self.conv3_1 = nn.Conv2d(64, 64, 3, stride=1, padding=1)   # 畳み込み層
-        self.conv3_2 = nn.Conv2d(64, 64, 3, stride=1, padding=1)   # 畳み込み層
-        self.fc1 = nn.Linear(16*16*64, 500)     # 全結合層
+        self.conv3_1 = nn.Conv2d(64, 128, 3, stride=1, padding=1)   # 畳み込み層
+        self.conv3_2 = nn.Conv2d(128, 128, 3, stride=1, padding=1)   # 畳み込み層
+        self.drop1 = nn.Dropout2d()
+        self.fc1 = nn.Linear(16*16*128, 500)     # 全結合層
+        self.drop2 = nn.Dropout()
         self.fc2 = nn.Linear(500, 6)         # 全結合層
 
     def forward(self, x):
@@ -30,7 +32,7 @@ class Classifier(nn.Module):
         x = F.relu(self.conv3_1(x))
         x = F.relu(self.conv3_2(x))
         x = F.max_pool2d(x, 2, 2)  # 縦横ともに半分になる（32->16）
-        x = x.view(-1, 16*16*64)
+        x = x.view(-1, 16*16*128)
         x = F.relu(self.fc1(x))
         x = self.fc2(x)
         return F.softmax(x, dim=1)
