@@ -15,6 +15,7 @@ from network import Classifier
 parser = argparse.ArgumentParser(description='a fork of pytorch pix2pix')
 parser.add_argument('--batchSize', type=int, default=16, help='training batch size')
 parser.add_argument('--nEpochs', type=int, default=50, help='number of epochs to train for')
+parser.add_argument('--lr', type=float, default=1e-3, help='learning rate')
 parser.add_argument('--cuda', action='store_true', help='use cuda?')
 parser.add_argument('--seed', type=int, default=0, help='random seed to use. Default=0')
 option = parser.parse_args()
@@ -39,7 +40,7 @@ else:
     classifier = Classifier()
     criterion = nn.CrossEntropyLoss(weight=weight)
 
-optimizer = optim.Adam(classifier.parameters())
+optimizer = optim.Adam(classifier.parameters(), lr=option.lr)
 
 print(classifier)
 
