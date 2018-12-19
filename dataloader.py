@@ -33,7 +33,7 @@ class DatasetFromFolder(data.Dataset):
         image = Image.open(image_path).convert('RGB')
         image = self.transform(image)
 
-        return image, self.label_indices[label]
+        return image, self.label_indices[label], image_path
 
     def __len__(self):
         return len(self.images)
