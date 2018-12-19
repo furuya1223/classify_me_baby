@@ -55,8 +55,7 @@ def test():
                     all_correct_num += 1
                     correct_num[label] += 1
                 predicted = predicted.cpu().numpy()[0]
-                print(predicted)
-                print(basename(image_path[0]))
+                print('{}: {}'.format(basename(image_path[0]), labels[label.data]))
                 indices = np.argsort(predicted)[::-1]
                 for index in indices:
                     print('{}: {:.04f} '.format(labels[index], predicted[index]), end='')
