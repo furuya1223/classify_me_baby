@@ -14,9 +14,7 @@ class DatasetFromFolder(data.Dataset):
                        for filename in listdir(join(image_dir, label))]
         self.label_indices = label_indices
 
-        transform_train = [transforms.RandomResizedCrop(128),
-                           transforms.RandomHorizontalFlip(),
-                           transforms.ToTensor(),
+        transform_train = [transforms.ToTensor(),
                            transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))]
         transform_test = [transforms.ToTensor(),
                           transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))]
