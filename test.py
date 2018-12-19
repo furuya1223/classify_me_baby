@@ -47,7 +47,6 @@ def test():
                     image = Variable(image)
                     label = Variable(label)
                 predicted = classifier.forward(image)
-                print(predicted)
                 predicted_label = torch.argmax(predicted)
 
                 label_num[label] += 1
