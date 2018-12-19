@@ -83,7 +83,7 @@ def train():
             predicted = classifier.forward(image)  # 前向き計算（ラベル予測）
             loss = criterion(predicted, label)  # クロスエントロピー誤差の計算
             loss.backward()  # 後ろ向き計算（誤差逆伝播で勾配計算）
-            optimizer.step()  # オプティマイザで勾配を修正
+            optimizer.step()  # オプティマイザでパラメータを修正
             loss_total += loss.data
 
         # 今エポックのロスの平均値を出力
