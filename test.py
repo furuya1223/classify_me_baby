@@ -40,7 +40,6 @@ def test():
             correct_num = [0] * 6
             label_num = [0] * 6
             for iteration, (image, label, image_path) in enumerate(test_data_loader, 1):
-                print(image_path)
                 if option.cuda:
                     image = Variable(image.cuda())
                     label = Variable(label.cuda())
@@ -55,8 +54,8 @@ def test():
                     all_correct_num += 1
                     correct_num[label] += 1
 
-                predicted = predicted.cpu().numpy()
-                print(basename(image_path))
+                predicted = predicted[0].cpu().numpy()
+                print(basename(image_path[0]))
                 indices = np.argsort(predicted)[::-1]
                 for index in indices:
                     print('{}: {:.04f} '.format(label[index], predicted[index]), end='')
