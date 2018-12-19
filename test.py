@@ -4,7 +4,7 @@ import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import DataLoader
 import numpy as np
-from os.path import join
+from os.path import join, basename
 import argparse
 
 from dataloader import DatasetFromFolder
@@ -55,8 +55,8 @@ def test():
                     correct_num[label] += 1
 
                 predicted = predicted.numpy()
-                print(os.path.basename(image_path))
-                indices = np.argsort(predicted, reverse=True)
+                print(basename(image_path))
+                indices = np.argsort(predicted)[::-1]
                 for index in indices:
                     print('{}: {:.04f} '.format(label[index], predicted[index]), end='')
                 print()
