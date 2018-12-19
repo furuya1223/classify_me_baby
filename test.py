@@ -5,6 +5,7 @@ import torch.backends.cudnn as cudnn
 import numpy as np
 from os.path import join, basename
 import argparse
+import random
 
 from dataloader import DatasetFromFolder
 
@@ -20,6 +21,7 @@ option = parser.parse_args()
 if option.cuda and not torch.cuda.is_available():
     raise Exception("No GPU found, please run without --cuda")
 
+random.seed(1)
 torch.manual_seed(option.seed)
 if option.cuda:
     torch.cuda.manual_seed(option.seed)
