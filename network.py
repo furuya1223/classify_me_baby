@@ -13,7 +13,7 @@ class Classifier(nn.Module):
         # モデル定義
         self.conv1_1 = nn.Conv2d(3, 32, 5, stride=1, padding=2)   # 畳み込み層
         self.conv2_1 = nn.Conv2d(32, 64, 5, stride=1, padding=2)   # 畳み込み層
-        self.fc1 = nn.Linear(32*32*128, 1024)     # 全結合層
+        self.fc1 = nn.Linear(32*32*64, 1024)     # 全結合層
         self.fc2 = nn.Linear(1024, 6)         # 全結合層
 
     def forward(self, x):
