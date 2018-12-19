@@ -16,21 +16,24 @@ from network import Classifier
 # コマンドライン引数の受け取り
 parser = argparse.ArgumentParser(description='a fork of pytorch pix2pix')
 parser.add_argument('--batchSize', type=int, default=64, help='training batch size')
-parser.add_argument('--nEpochs', type=int, default=200, help='number of epochs to train for')
+parser.add_argument('--nEpochs', type=int, default=100, help='number of epochs to train for')
 parser.add_argument('--lr', type=float, default=1e-3, help='learning rate')
 parser.add_argument('--cuda', action='store_true', help='use cuda?')
 parser.add_argument('--seed', type=int, default=0, help='random seed to use. Default=0')
 option = parser.parse_args()
 
+# GPU使うって言ってるのに使えなかったら怒る
 if option.cuda and not torch.cuda.is_available():
     raise Exception("No GPU found, please run without --cuda")
 
+# 実行ごとに結果が変わらないように乱数シードを固定
 random.seed(1)
 torch.manual_seed(option.seed)
 if option.cuda:
     torch.cuda.manual_seed(option.seed)
     cudnn.deterministic = True
 
+# ラベルなどの準備
 labels = np.array(['agiri', 'botsu', 'others', 'sonya', 'yasuna', 'yasuna_sonya'])
 label_indices = {label: index for index, label in enumerate(labels)}
 weight = torch.Tensor([1/9, 1/2, 1/13, 1/35, 1/68, 1/9])
