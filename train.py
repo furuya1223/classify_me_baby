@@ -49,6 +49,7 @@ def train():
     for epoch in range(1, option.nEpochs + 1):
         print('Epoch: {}'.format(epoch))
         classifier.train()
+        loss_total = 0
         for iteration, (image, label, _) in enumerate(train_data_loader, 1):
             if option.cuda:
                 image = Variable(image.cuda())
@@ -61,7 +62,8 @@ def train():
             loss = criterion(predicted, label)
             loss.backward()
             optimizer.step()
-            print('Iteration: {}/{}, Loss: {:.04f}'.format(iteration, len(train_data_loader), loss.data))
+            loss_total += loss.data
+        print('Average Loss: {:.04f}'.format(loss_total / option.batchSize))
 
         # test
         classifier.eval()

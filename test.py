@@ -62,7 +62,7 @@ def test():
 
             print('accuracy: {:.04f}'.format(all_correct_num / len(test_data_loader)))
             for i in range(6):
-                print('{:.04f}, '.format(correct_num[i] / label_num[i]), end='')
+                print('{}: {:.04f}, '.format(labels[i], correct_num[i] / label_num[i]))
             print()
         else:
             pass
