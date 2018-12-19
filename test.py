@@ -47,6 +47,7 @@ def test():
                     image = Variable(image)
                     label = Variable(label)
                 predicted = classifier.forward(image)
+                print(predicted)
                 predicted_label = torch.argmax(predicted)
 
                 label_num[label] += 1
@@ -56,9 +57,8 @@ def test():
                 predicted = predicted.cpu().numpy()[0]
                 print(basename(image_path[0]))
                 indices = np.argsort(predicted)[::-1]
-                print(predicted)
                 for index in indices:
-                    print('{}: {:.04f} '.format(label[index], predicted[index]), end='')
+                    print('{}: {:.04f} '.format(labels[index], predicted[index]), end='')
                 print()
 
             print('accuracy: {:.04f}'.format(all_correct_num / len(test_data_loader)))
