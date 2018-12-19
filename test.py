@@ -56,6 +56,7 @@ def test():
                 predicted = predicted.cpu().numpy()[0]
                 print(basename(image_path[0]))
                 indices = np.argsort(predicted)[::-1]
+                print(predicted)
                 for index in indices:
                     print('{}: {:.04f} '.format(label[index], predicted[index]), end='')
                 print()
