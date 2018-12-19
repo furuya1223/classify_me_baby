@@ -14,9 +14,11 @@ class DatasetFromFolder(data.Dataset):
                        for filename in listdir(join(image_dir, label))]
         self.label_indices = label_indices
 
-        transform_train = [transforms.ToTensor(),
+        transform_train = [transforms.Resize(28),
+                           transforms.ToTensor(),
                            transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))]
-        transform_test = [transforms.ToTensor(),
+        transform_test = [transforms.Resize(28),
+                          transforms.ToTensor(),
                           transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))]
         if mode == 'train':
             self.transform = transforms.Compose(transform_train)
