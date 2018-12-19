@@ -53,8 +53,9 @@ def test():
                 if predicted_label == label:
                     all_correct_num += 1
                     correct_num[label] += 1
-
+                print(predicted.size())
                 predicted = predicted.cpu().numpy()
+                print(predicted.shape)
                 print(basename(image_path[0]))
                 indices = np.argsort(predicted[0])[::-1]
                 for index in indices:
