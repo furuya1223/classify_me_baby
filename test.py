@@ -40,6 +40,7 @@ def test():
             correct_num = [0] * 6
             label_num = [0] * 6
             for iteration, (image, label, image_path) in enumerate(test_data_loader, 1):
+                print(image_path)
                 if option.cuda:
                     image = Variable(image.cuda())
                     label = Variable(label.cuda())
