@@ -1,6 +1,7 @@
 import torch
 from torch.autograd import Variable
 from torch.utils.data import DataLoader
+import torch.backends.cudnn as cudnn
 import numpy as np
 from os.path import join, basename
 import argparse

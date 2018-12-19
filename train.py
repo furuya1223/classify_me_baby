@@ -3,6 +3,7 @@ from torch.autograd import Variable
 import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import DataLoader
+import torch.backends.cudnn as cudnn
 import numpy as np
 from os.path import join
 import argparse
@@ -26,6 +27,7 @@ if option.cuda and not torch.cuda.is_available():
 torch.manual_seed(option.seed)
 if option.cuda:
     torch.cuda.manual_seed(option.seed)
+    cudnn.deterministic = True
 
 labels = np.array(['agiri', 'botsu', 'others', 'sonya', 'yasuna', 'yasuna_sonya'])
 label_indices = {label: index for index, label in enumerate(labels)}
