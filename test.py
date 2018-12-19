@@ -54,7 +54,7 @@ def test():
                     all_correct_num += 1
                     correct_num[label] += 1
 
-                predicted = predicted[0].cpu().numpy()
+                predicted = predicted.cpu().numpy()
                 print(basename(image_path[0]))
                 indices = np.argsort(predicted)[::-1]
                 for index in indices:
