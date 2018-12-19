@@ -89,6 +89,8 @@ def train():
                 print('{:.04f}, '.format(correct_num[i] / label_num[i]), end='')
             print()
 
+    torch.save(classifier, 'trained_classifier.pth')
+
 
 if __name__ == '__main__':
     train()
