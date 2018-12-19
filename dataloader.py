@@ -16,7 +16,7 @@ class DatasetFromFolder(data.Dataset):
 
         transform_train = [transforms.RandomRotation(30),
                            transforms.RandomResizedCrop(28),
-                           trainsforms.RandomHorizontalFlip(),
+                           transforms.RandomHorizontalFlip(),
                            transforms.ToTensor(),
                            transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))]
         transform_test = [transforms.Resize(28),
