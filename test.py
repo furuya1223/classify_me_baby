@@ -66,6 +66,7 @@ def test():
                 print('{:.04f}, '.format(correct_num[i] / label_num[i]), end='')
             print()
         else:
+            pass
 
 
 if __name__ == '__main__':
