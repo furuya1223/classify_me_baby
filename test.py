@@ -1,17 +1,14 @@
 import torch
 from torch.autograd import Variable
-import torch.nn as nn
-import torch.optim as optim
 from torch.utils.data import DataLoader
 import numpy as np
 from os.path import join, basename
 import argparse
 
 from dataloader import DatasetFromFolder
-from network import Classifier
 
 
-# Training settings
+# コマンドライン引数の受け取り
 parser = argparse.ArgumentParser(description='a fork of pytorch pix2pix')
 parser.add_argument('--model', type=str, default='trained_classifier.pth', help='model file to use')
 parser.add_argument('--image', type=str, default='', help='image to be classified')
@@ -21,6 +18,10 @@ option = parser.parse_args()
 
 if option.cuda and not torch.cuda.is_available():
     raise Exception("No GPU found, please run without --cuda")
+
+torch.manual_seed(option.seed)
+if option.cuda:
+    torch.cuda.manual_seed(option.seed)
 
 labels = np.array(['agiri', 'botsu', 'others', 'sonya', 'yasuna', 'yasuna_sonya'])
 label_indices = {label: index for index, label in enumerate(labels)}
@@ -62,7 +63,7 @@ def test():
 
             print('accuracy: {:.04f}'.format(all_correct_num / len(test_data_loader)))
             for i in range(6):
-                print('{}: {:.04f}, '.format(labels[i], correct_num[i] / label_num[i]))
+                print('{}: {:.04f}'.format(labels[i], correct_num[i] / label_num[i]))
             print()
         else:
             pass
