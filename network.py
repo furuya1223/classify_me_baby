@@ -21,7 +21,7 @@ class Classifier(nn.Module):
         x = F.max_pool2d(x, 2, 2)  # 縦横ともに半分になる（128->64）
         x = F.relu(self.conv2_1(x))
         x = F.max_pool2d(x, 2, 2)  # 縦横ともに半分になる（64->32）
-        x = x.view(-1, 32*32*128)
+        x = x.view(-1, 32*32*64)
         x = F.relu(self.fc1(x))
         x = self.fc2(x)
         return F.softmax(x, dim=1)
