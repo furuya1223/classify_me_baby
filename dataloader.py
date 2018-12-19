@@ -15,7 +15,7 @@ class DatasetFromFolder(data.Dataset):
         self.label_indices = label_indices
 
         transform_train = [transforms.RandomRotation(30),
-                           transforms.RandomResizedClop(28),
+                           transforms.RandomResizedCrop(28),
                            trainsforms.RandomHorizontalFlip(),
                            transforms.ToTensor(),
                            transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))]
