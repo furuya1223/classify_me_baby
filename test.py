@@ -28,7 +28,7 @@ label_indices = {label: index for index, label in enumerate(labels)}
 test_set = DatasetFromFolder(join('dataset', 'test'), label_indices, 'test')
 test_data_loader = DataLoader(dataset=test_set, batch_size=1)
 
-classifier = torch.loat(option.model)
+classifier = torch.load(option.model)
 print(classifier)
 
 
