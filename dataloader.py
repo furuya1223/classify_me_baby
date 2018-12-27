@@ -3,6 +3,7 @@ import torch.utils.data as data
 from os.path import join
 from os import listdir
 from PIL import Image
+import numpy as np
 
 
 # データローダの定義（データを1つずつ読み込むもの）
@@ -13,9 +14,16 @@ class DatasetFromFolder(data.Dataset):
 
         # ディレクトリに存在するサブディレクトリとその中のファイルを列挙して
         # パスとラベルをリスト化（ラベルはサブディレクトリ名）
-        self.images = [(join(image_dir, label, filename), label)
-                       for label in listdir(image_dir)
-                       for filename in listdir(join(image_dir, label))]
+        # self.images = [(join(image_dir, label, filename), label)
+        #                for label in listdir(image_dir)
+        #                for filename in listdir(join(image_dir, label))]
+        self.images = []
+        for label in listdir(image_dir):
+            label_images = [(join(image_dir, label, filename), label)
+                            for filename in listdir(join(image_dir, label))]
+            index = np.mod(range(273), len(label_images))
+            self.images += label_images[index]
+
         self.label_indices = label_indices  # ラベル名から番号を得るための辞書
 
         # 学習用の前処理

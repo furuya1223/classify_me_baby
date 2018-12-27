@@ -36,7 +36,7 @@ if option.cuda:
 # ラベルなどの準備
 labels = np.array(['agiri', 'botsu', 'others', 'sonya', 'yasuna', 'yasuna_sonya'])
 label_indices = {label: index for index, label in enumerate(labels)}
-weight = torch.Tensor([1/9, 1/2, 1/13, 1/35, 1/68, 1/9])
+# weight = torch.Tensor([1/9, 1/2, 1/13, 1/35, 1/68, 1/9])
 
 # データローダの用意
 train_set = DatasetFromFolder(join('dataset', 'train'), label_indices, 'train')
@@ -47,12 +47,12 @@ test_data_loader = DataLoader(dataset=test_set, batch_size=1)
 # 分類器と誤差関数の用意
 if option.cuda:
     classifier = Classifier().cuda()
-    # 重み付きクロスエントロピー
-    criterion = nn.CrossEntropyLoss(weight=weight.cuda()).cuda()
+    # クロスエントロピー
+    criterion = nn.CrossEntropyLoss().cuda()
 else:
     classifier = Classifier()
-    # 重み付きクロスエントロピー
-    criterion = nn.CrossEntropyLoss(weight=weight)
+    # クロスエントロピー
+    criterion = nn.CrossEntropyLoss()
 
 # Adamオプティマイザを用意
 optimizer = optim.Adam(classifier.parameters(), lr=option.lr)
