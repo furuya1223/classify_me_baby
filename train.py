@@ -71,6 +71,7 @@ def train():
 
         # イテレーション
         for iteration, (image, label, _) in enumerate(train_data_loader, 1):
+            return 0
             # 読み込んだ画像データと正解ラベルをVariableで包む
             if option.cuda:
                 image = Variable(image.cuda())

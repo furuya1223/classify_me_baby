@@ -4,6 +4,7 @@ from os.path import join
 from os import listdir
 from PIL import Image
 import numpy as np
+from itertools import islice, cycle
 
 
 # データローダの定義（データを1つずつ読み込むもの）
@@ -21,8 +22,7 @@ class DatasetFromFolder(data.Dataset):
         for label in listdir(image_dir):
             label_images = [(join(image_dir, label, filename), label)
                             for filename in listdir(join(image_dir, label))]
-            index = np.mod(range(273), len(label_images))
-            self.images += label_images[index]
+            self.images += list(islice(cycle(label_images), 273))
 
         self.label_indices = label_indices  # ラベル名から番号を得るための辞書
 
