@@ -53,6 +53,7 @@ def test():
             predicted = predicted.cpu().numpy()[0]
             print('{}: {}'.format(basename(image_path[0]), labels[label.data]))
             indices = np.argsort(predicted)[::-1]
+            print('o ' if predicted_label == label else 'x ', end='')
             for index in indices:
                 print('{}: {:.04f} '.format(labels[index], predicted[index]), end='')
             print()
