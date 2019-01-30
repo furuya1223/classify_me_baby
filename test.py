@@ -24,7 +24,9 @@ label_indices = {label: index for index, label in enumerate(labels)}
 test_set = DatasetFromFolder(join('dataset', 'test'), label_indices, 'test')
 test_data_loader = DataLoader(dataset=test_set, batch_size=1)
 
-classifier = torch.load(option.model)
+classifier = Classifier().cuda()
+checkpoint = torch.load('checkpoint.pth')
+classifier.load_state_dict(checkpoint['state_dict'])
 print(classifier)
 
 
@@ -53,6 +55,7 @@ def test():
             predicted = predicted.cpu().numpy()[0]
             print('{}: {}'.format(basename(image_path[0]), labels[label.data]))
             indices = np.argsort(predicted)[::-1]
+            print('o ' if predicted_label == label else 'x ', end='')
             for index in indices:
                 print('{}: {:.04f} '.format(labels[index], predicted[index]), end='')
             print()

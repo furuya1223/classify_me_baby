@@ -14,9 +14,9 @@ from network import Classifier
 
 
 # コマンドライン引数の受け取り
-parser = argparse.ArgumentParser(description='a fork of pytorch pix2pix')
+parser = argparse.ArgumentParser(description='Classifier demo with PyTorch')
 parser.add_argument('--batchSize', type=int, default=64, help='training batch size')
-parser.add_argument('--nEpochs', type=int, default=150, help='number of epochs to train for')
+parser.add_argument('--nEpochs', type=int, default=130, help='number of epochs to train for')
 parser.add_argument('--lr', type=float, default=1e-3, help='learning rate')
 parser.add_argument('--cuda', action='store_true', help='use cuda?')
 parser.add_argument('--seed', type=int, default=0, help='random seed to use. Default=0')
@@ -123,7 +123,7 @@ def train():
             print()
 
     # 学習済みモデルを保存
-    torch.save(classifier, 'trained_classifier.pth')
+    torch.save({'state_dict': classifier.state_dict()}, 'checkpoint.pth')
 
 
 if __name__ == '__main__':
